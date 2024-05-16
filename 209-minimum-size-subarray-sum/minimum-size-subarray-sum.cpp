@@ -6,11 +6,11 @@ public:
         int current_sum = 0;
         int min_length = INT_MAX;
 
-        int check_sum  = accumulate(nums.begin(), nums.end(),0);
+        // int check_sum  = accumulate(nums.begin(), nums.end(),0);
 
-        if(check_sum < target){
-            return 0;
-        }
+        // if(check_sum < target){
+        //     return 0;
+        // }
 
         for (int r = 0; r < nums.size(); r++){
             current_sum += nums[r];
@@ -22,7 +22,14 @@ public:
             }
         }
 
-        return min_length;
+        if(min_length == INT_MAX){
+            return 0;
+        }
+
+        else{
+            return min_length;
+        }
+        
         
     }
 };
