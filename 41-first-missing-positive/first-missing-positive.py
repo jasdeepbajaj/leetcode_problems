@@ -1,13 +1,15 @@
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
-        if len(nums) == 1 and nums[0] != 1:
-            return 1
-        
-
         n = len(nums)
         for i in range(n):
             if nums[i] <=0 or nums[i] > n:
                 nums[i] = -1
+        
+        if len(nums) == 1 and nums[0] != 1:
+            return 1
+        
+
+        
 
         max_num = max(nums)
         if max_num < 1:
