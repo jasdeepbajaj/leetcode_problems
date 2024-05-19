@@ -35,13 +35,16 @@ class Solution:
                     dist[new_cell[0]][new_cell[1]]  = dist[i][j] + 1
                     q.append(new_cell)
 
-        
-        queue = PriorityQueue()
-        queue.put((-dist[0][0], 0,0))
+        pq = []
+        heappush(pq,(-dist[0][0], 0,0))
+        # queue = PriorityQueue()
+        # queue.put((-dist[0][0], 0,0))
         # searched_nodes = []
         visited = set()
-        while not queue.empty():
-            dis, i, j = queue.get()
+        while pq:
+        # while not queue.empty():
+            # dis, i, j = queue.get()
+            dis, i, j = heappop(pq)
             dis = -dis
             if (i, j) in visited:
                 continue
@@ -53,4 +56,5 @@ class Solution:
             for new_cell in move(i,j, n):
                 
                 if new_cell not in visited:
-                    queue.put((-min(dis, dist[new_cell[0]][new_cell[1]]), new_cell[0], new_cell[1]))
+                    # queue.put((-min(dis, dist[new_cell[0]][new_cell[1]]), new_cell[0], new_cell[1]))
+                    heappush(pq,(-min(dis, dist[new_cell[0]][new_cell[1]]), new_cell[0], new_cell[1]))
