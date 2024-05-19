@@ -1,14 +1,14 @@
 from queue import PriorityQueue
 
 def move(i,j,n):
-        possible_new_cells = []
+        # possible_new_cells = []
         directions = [(0,1), (1,0), (0,-1),(-1,0)]
         for dx, dy in directions:
             new_pos = i+dx, j+dy
             if (0<=new_pos[0]<n) and (0<=new_pos[1]<n):
-                possible_new_cells.append(new_pos)
-
-        return possible_new_cells
+                # possible_new_cells.append(new_pos)
+                yield new_pos
+        #  possible_new_cells
 
 class Solution: 
     
