@@ -11,10 +11,9 @@ private:
 
 public:
     int findCircleNum(vector<vector<int>>& isConnected) {
-        int n = isConnected.size();
         int numberofProvinces = 0;
-        vector<int> vis(n,0);
-        for(int i=0; i<n; i++){
+        vector<int> vis(isConnected.size(),0);
+        for(int i=0; i<isConnected.size(); i++){
             if (!vis[i]){
                 numberofProvinces++;
                 dfs(i, isConnected, vis);
