@@ -8,8 +8,6 @@ private:
         while(!q.empty()){
             int curr_x = q.front().first;
             int curr_y = q.front().second;
-            // visited[curr_x][curr_y] = 1;
-            // image[curr_x][curr_y] = 2;
             q.pop();
 
             for(auto itr: movements){
