@@ -3,29 +3,23 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        p1 = 0
-        p2 = 0
-        temp = []
 
-        while (p1<m and p2<n):
-            if nums1[p1]<nums2[p2]:
-                temp.append(nums1[p1])
-                p1+=1
+        while (m>0 and n>0):
+            if nums1[m-1]>nums2[n-1]:
+                nums1[m+n-1] = nums1[m-1]
+                m-=1
 
             else:
-                temp.append(nums2[p2])
-                p2+=1
+                nums1[m+n-1] = nums2[n-1]
+                n-=1
 
-        while p1<m:
-            temp.append(nums1[p1])
-            p1+=1
+        while m>0:
+            nums1[m+n-1] = nums1[m-1]
+            m-=1
 
-        while p2<n:
-            temp.append(nums2[p2])
-            p2+=1
-
-        for i in range(0, m+n):
-            nums1[i] = temp[i]
+        while n>0:
+            nums1[m+n-1] = nums2[n-1]
+            n-=1
 
 
         
