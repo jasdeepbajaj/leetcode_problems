@@ -33,18 +33,18 @@ public:
             if (grid[m-1][j] == 1 && !vis[m-1][j]) dfs(m-1, j, vis, grid);
         }
 
-        int sum_grid = 0;
-        int sum_vis = 0;
+        int enclaveCount = 0;
 
-        // Iterate through the 2D vector and calculate the sum
+        // Count the number of enclaves
         for (int i = 0; i < m; ++i) {
             for (int j = 0; j < n; ++j) {
-                sum_grid += grid[i][j];
-                sum_vis += vis[i][j];
+                if (grid[i][j] == 1 && !vis[i][j]) {
+                    enclaveCount++;
+                }
             }
         }
 
-        return (sum_grid - sum_vis);
+        return enclaveCount;
         
     }
 };
