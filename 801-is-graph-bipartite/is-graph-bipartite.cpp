@@ -4,11 +4,16 @@ private:
         visited[node] = color;
 
         for (auto itr: graph[node]){
-            if(visited[itr]==-1){
-                if (dfs(itr, !color, visited, graph)==false) return false;
+            if (visited[itr] != -1){
+                if (visited[itr] == color){
+                    return false;
+                }
+                else{
+                    continue;
+                }
             }
-            else if (visited[itr]==color){
-                return false;
+            else{
+                if (!dfs(itr, !color, visited, graph)) return false;
             }
         }
         return true;
