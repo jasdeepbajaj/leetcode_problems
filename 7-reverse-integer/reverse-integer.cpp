@@ -1,19 +1,19 @@
 class Solution {
 public:
     int reverse(int x) {
-        long rev = 0;
-        int digit;
+        long ans = 0;
+        int rem;
 
         while (x != 0) {
-            digit = x % 10;
-            rev = rev * 10 + digit;
+            rem = x % 10;
+            ans = ans * 10 + rem;
             x /= 10;
         }
         
-        if (rev > INT_MAX || rev < INT_MIN) {
+        if (ans > INT_MAX || ans < INT_MIN) {
             return 0;
         }
 
-        return rev;
+        return ans;
     }
 };
