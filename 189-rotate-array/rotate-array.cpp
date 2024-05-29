@@ -1,14 +1,15 @@
 class Solution {
 
-// private:
-//     void reverse(vector<int>& sub_array){
-//         int j = sub_array.size()-1
-        
-//         for(int i = 0; i<=sub_array.size()/2; i++){
-//             swap(sub_array[i], sub_array[j])
-//             j--;
-//         }
-//     }
+private:
+    void Reverse(vector<int>& arr, int start, int end){
+        while (start<=end){
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
 
 public:
     void rotate(vector<int>& nums, int k) {
@@ -16,13 +17,17 @@ public:
         int n = nums.size();
         k = k%n;
 
-        reverse(nums.end()-k, nums.end());
-        // for(int i = 0; i<n; i++){
-        //     cout<<nums[i]<<" ";
-        // }
-        // cout<<endl;
-        reverse(nums.begin(), nums.end()-k);
-        reverse(nums.begin(), nums.end());
+        // reverse(nums.end()-k, nums.end());
+        // // for(int i = 0; i<n; i++){
+        // //     cout<<nums[i]<<" ";
+        // // }
+        // // cout<<endl;
+        // reverse(nums.begin(), nums.end()-k);
+        // reverse(nums.begin(), nums.end());
+
+        Reverse(nums, n-k, n-1);
+        Reverse(nums, 0, n-k-1);
+        Reverse(nums, 0, n-1);
         
         
     }
