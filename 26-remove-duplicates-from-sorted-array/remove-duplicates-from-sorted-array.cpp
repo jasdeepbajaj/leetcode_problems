@@ -8,7 +8,7 @@ public:
                 i++;
             }
         }
-        nums.erase(nums.begin() + i + 1, nums.end());
+        // nums.erase(nums.begin() + i + 1, nums.end());
         return i+1;
     }
 };
