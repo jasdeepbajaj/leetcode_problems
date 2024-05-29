@@ -1,15 +1,14 @@
 class Solution {
 public:
     int removeDuplicates(vector<int>& nums) {
-        map<int, int> hashh; //key = num, value = frequency
-
-        for(int i = 0; i<nums.size(); i++){
-            hashh[nums[i]]++;
+        int i = 0;
+        for (int j = 0; j<nums.size(); j++){
+            if (nums[j] !=nums[i]){
+                nums[i+1] = nums[j];
+                i++;
+            }
         }
-        nums.clear();
-        for(auto pair: hashh){
-            nums.push_back(pair.first);
-        }
+        nums.erase(nums.begin() + i + 1, nums.end());
         return nums.size();
     }
 };
