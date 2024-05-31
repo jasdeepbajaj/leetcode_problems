@@ -11,22 +11,23 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        // stack<int> st;
-
+        // Base case: if the list is empty or contains only one node
         if (head == nullptr || head->next == nullptr) return head;
 
-        ListNode* last = nullptr;
-        ListNode* current = head;
+        // Initialize three pointers
+        ListNode* previous = nullptr;  // Initially points to null
+        ListNode* current = head;      // Initially points to the head of the list
+        ListNode* nextNode = nullptr;  // Used to store the next node
 
-        while(current!=nullptr){
-            ListNode* nextNode = current->next;
-            current->next = last;
-            last = current;
-            current = nextNode;
+        // Iterate through the list
+        while (current != nullptr) {
+            nextNode = current->next;  // Store the next node
+            current->next = previous;  // Reverse the current node's pointer
+            previous = current;        // Move the previous pointer to the current node
+            current = nextNode;        // Move the current pointer to the next node
         }
 
-        return last;
-
-              
+        // At the end of the loop, previous points to the new head of the reversed list
+        return previous;
     }
 };
