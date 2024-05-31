@@ -23,8 +23,8 @@ public:
     ListNode* middleNode(ListNode* head) {
         int l = get_length(head);
         cout<<l<<endl;
-        int mid = l/2 + 1;
-        int i = 1; 
+        int mid = l/2 ;
+        int i = 0; 
         ListNode* current = head;
         while (i<mid){
             current = current->next;
