@@ -2,19 +2,20 @@ class Solution {
 public:
     int missingNumber(vector<int>& nums) {
         int n = nums.size();
+        bool i_exist;
         
-        int max_ = INT_MIN;
-        int min_ = INT_MAX;
-
-        int sum_actual = 0;
-        for(int i = 0; i<n; i++){
-            if (nums[i]  > max_) max_ = nums[i];
-            if (nums[i] < min_) min_ = nums[i];
-            sum_actual += nums[i];
+        for (int i = 0; i <= n; i++) {
+            i_exist = false;
+            for (int j = 0; j < n; j++) {
+                if (nums[j] == i) {
+                    i_exist = true;
+                    break; // No need to continue the inner loop if we found the number
+                }
+            }
+            if (!i_exist) return i;
         }
-        int sum_should_be = (max_)*(max_ + 1)/2;
-        if (min_ != 0) return 0;
-        if (sum_actual == sum_should_be ) return max_  + 1;
-        else return sum_should_be - sum_actual;
+        
+        // This return statement is just a safety net and should never be reached
+        return -1;
     }
 };
