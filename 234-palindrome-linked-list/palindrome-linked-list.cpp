@@ -10,53 +10,55 @@
  */
 class Solution {
 public:
-    int get_length(ListNode* head){
-        int count = 0;
-        ListNode* current = head;
-
-        while(current!=nullptr){
-            count++;
-            current = current->next;
-        }
-        return count;
-    }
     bool isPalindrome(ListNode* head) {
-        int l = get_length(head);
-        cout<<l<<endl;
-        if (l == 1) return true;
-        stack<int> st;
-        bool isOdd = false;
-        if (l%2 !=0) isOdd = true;
-        cout<<isOdd<<endl;
-        int mid = l/2;
-        cout<<mid<<endl;
-        ListNode* current  = head;
-        int count = 0;
-        while (current!=nullptr){
-            count++;
-            if (count<=mid){
-                st.push(current->val);
-                current = current->next;
-            }
-
-            else{
-                if (isOdd){
-                    current = current->next;
-                    isOdd = false;
-                }
-                else{
-                    if(st.top() == current->val){
-                        st.pop();
-                        current = current->next;
-                    }
-                    else{
-                        return false;
-                    }
-                }
-            }
-            
+        if (head==NULL || head->next==NULL) {
+            return true;
         }
-
-        return true;
+        
+        // Step 1: Find the midpoint using Tortoise and Hare approach
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+        while (fast->next!=NULL && fast->next->next!=NULL) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        // Step 2: Reverse the second half of the list
+        ListNode* secondHalf = reverseList(slow->next);
+        ListNode* firstHalf = head;
+        
+        // Step 3: Compare the first half and the reversed second half
+        ListNode* secondHalfCopy = secondHalf;
+        bool isPalin = true;
+        
+        while (secondHalf) {
+            if (firstHalf->val != secondHalf->val) {
+                isPalin = false;
+                break;
+            }
+            firstHalf = firstHalf->next;
+            secondHalf = secondHalf->next;
+        }
+        
+        // Step 4: Restore the list (optional)
+        reverseList(secondHalfCopy);
+        
+        return isPalin;
+    }
+    
+private:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = nullptr;
+        ListNode* curr = head;
+        
+        while (curr) {
+            ListNode* nextTemp = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nextTemp;
+        }
+        
+        return prev;
     }
 };
