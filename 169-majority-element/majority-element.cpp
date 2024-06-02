@@ -1,15 +1,22 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        //using hashing
-        map<int, int> dict; //element. count
-
+        //moore's voting algorithm
+        int count = 0;
+        int el;
         for (int i = 0; i<nums.size(); i++){
-            dict[nums[i]]++;
+            if (count == 0){
+                count = 1;
+                el = nums[i];
+            }
+            else if (nums[i] == el){
+                count++;
+            }
+            else{
+                count--;
+            }
         }
-        for (auto pair: dict){
-            if (pair.second> nums.size()/2) return pair.first;
-        }
-        return -1;
+
+        return el;
     }
 };
