@@ -10,26 +10,17 @@
  */
 class Solution {
 public:
-
-    int get_length(ListNode* head){
-        int count = 0;
-        ListNode* current = head;
-        while (current != nullptr){
-            current = current->next;
-            count++;
-        }
-        return count;
-    }
     ListNode* middleNode(ListNode* head) {
-        int l = get_length(head);
-        cout<<l<<endl;
-        int mid = l/2 ;
-        int i = 0; 
-        ListNode* current = head;
-        while (i<mid){
-            current = current->next;
-            i++;
+        //By tortoise and hare approach
+
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while (fast!=nullptr && fast->next!=nullptr){
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        return current;
+
+        return slow;
     }
 };
