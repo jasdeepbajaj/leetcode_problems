@@ -5,19 +5,19 @@ public:
         if (n == 0) return 0;
         if (n == 1) return 1;
         
-        // Create a dp array to store Fibonacci numbers up to n
-        vector<int> dp(n + 1, -1);
         
         // Initialize the base cases
-        dp[0] = 0;
-        dp[1] = 1;
+        int prev2 = 0;
+        int prev = 1;
 
         // Fill the dp array iteratively
         for (int i = 2; i <= n; ++i) {
-            dp[i] = dp[i - 1] + dp[i - 2];
+            int curri = prev + prev2;
+            prev2 = prev;
+            prev = curri;
         }
 
         // Return the nth Fibonacci number
-        return dp[n];
+        return prev;
     }
 };
