@@ -1,24 +1,23 @@
 class Solution {
 public:
-    vector<int> dp;
-    
-    Solution() {
-        // Initialize dp array with a size of 31 (0 to 30) and fill it with -1
-        // Adjust the size if you need a larger range of Fibonacci numbers
-        dp.resize(31, -1);
-    }
-
     int fib(int n) {
-        // Base cases: if n is 0 or 1, return n
-        if (n <= 1) return n;
+        // Handle base cases
+        if (n == 0) return 0;
+        if (n == 1) return 1;
         
-        // If the value has already been computed, return it
-        if (dp[n] != -1) return dp[n];
+        // Create a dp array to store Fibonacci numbers up to n
+        vector<int> dp(n + 1, -1);
         
-        // Compute the Fibonacci number recursively and store the result in dp array
-        dp[n] = fib(n - 1) + fib(n - 2);
-        
-        // Return the computed Fibonacci number
+        // Initialize the base cases
+        dp[0] = 0;
+        dp[1] = 1;
+
+        // Fill the dp array iteratively
+        for (int i = 2; i <= n; ++i) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+
+        // Return the nth Fibonacci number
         return dp[n];
     }
 };
