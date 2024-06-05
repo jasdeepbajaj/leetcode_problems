@@ -9,20 +9,18 @@ public:
         while (right<n){
             if (nums[right] == 0){
                 zeros ++;
-                if (zeros > k){
-                    while (zeros > k){
-                        if (nums[left] == 0){
-                            zeros--;
-                        }
-                        left++;
-                    }
-                }
             }
 
+            if (zeros > k){
+                if (nums[left] == 0) zeros--;
+                left++;
+            }
 
-            int len = right - left + 1;
-            maxLen = max(len, maxLen);
-            right ++; 
+            if (zeros<=k){
+                int len = right - left + 1;
+                maxLen = max(len, maxLen);
+            }
+            right ++;
         }
         return maxLen;
     }
