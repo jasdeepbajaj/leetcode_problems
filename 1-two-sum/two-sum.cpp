@@ -1,13 +1,15 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        int n = nums.size();
-        for(auto i = 0; i < n; i++){
-            for (int j = i+1; j<n; j++){
-                if (nums[i] + nums[j] == target){
-                   return {i,j}; 
-                }
+        //better solution - using map
+        map<int, int> mpp; //element, index
+        for(int i = 0; i<nums.size(); ++i){
+            int num = nums[i];
+            int more = target - num;
+            if (mpp.find(more) != mpp.end()){
+                return {mpp[more], i};
             }
+            mpp[num] = i;
         }
 
         return {-1,-1};
