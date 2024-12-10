@@ -2,6 +2,7 @@ class Solution {
 public:
     int missingNumber(vector<int>& nums) {
         //Hashing
+        // TC - O(n^2)
         int n = nums.size();
         vector<int> hashMap(n + 1, 0);
 
