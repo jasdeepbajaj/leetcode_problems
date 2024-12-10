@@ -1,19 +1,19 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        //brute force -- Linear Search
-        //TC = O(n^2)
-        bool found;
+        //Hashing
+        int n = nums.size();
+        vector<int> hashMap(n + 1, 0);
+
+        int curr_num;
+        for(int i = 0; i<n; ++i){
+            curr_num = nums[i];
+            hashMap[curr_num]++;
+        }
+
         int ans;
-        for (int i = 0; i <= nums.size(); ++i){
-            found = false;
-            for(int num : nums){
-                if(num == i){
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) ans = i;
+        for(int i = 0; i<hashMap.size(); ++i){
+            if (hashMap[i] == 0) ans = i;
         }
 
         return ans;
