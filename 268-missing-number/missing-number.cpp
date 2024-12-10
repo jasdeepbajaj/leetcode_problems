@@ -1,13 +1,21 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        int n = nums.size();
-        int p = 0;
-        for (int i = 0; i < n; i++){
-            p^=(i+1);
-            p^=nums[i];
+        //brute force -- Linear Search
+        //TC = O(n^2)
+        bool found;
+        int ans;
+        for (int i = 0; i <= nums.size(); ++i){
+            found = false;
+            for(int num : nums){
+                if(num == i){
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) ans = i;
         }
 
-        return p;
+        return ans;
     }
 };
