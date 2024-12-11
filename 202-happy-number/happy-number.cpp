@@ -16,21 +16,20 @@ public:
     bool isHappy(int num) {
         
         
-        int ans = square_of_digits(num);
+        // int ans = square_of_digits(num);
         
         unordered_set<int> seen;
-        while (ans != 1){
-            ans = square_of_digits(ans);
+        while (num != 1){
+            num = square_of_digits(num);
             
-            if (seen.find(ans) != seen.end()) return false;
+            if (seen.find(num) != seen.end()) return false;
             
-            seen.insert(ans);
+            seen.insert(num);
         }
         
         
 
-        if (ans == 1) return true;
+        return true;
 
-        return false;
     }
 };
