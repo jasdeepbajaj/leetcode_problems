@@ -1,21 +1,21 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        // Moore's Voting Algorithm
-        int count = 0;
-        int el;
-        
-        for (int i = 0; i < nums.size(); i++) {
-            if (count == 0) {
-                count = 1;
-                el = nums[i];  // Set the current element as the candidate
-            } else if (nums[i] == el) {
-                count++;  // Increment count if the current element is the candidate
-            } else {
-                count--;  // Decrement count if the current element is not the candidate
-            }
+        map<int, int> mpp;
+        int n = nums.size();
+
+        for(int i = 0; i<n; ++i){
+            int curr_num = nums[i];
+            if(mpp.find(curr_num) != mpp.end()) mpp[curr_num]++;
+            else mpp[curr_num] = 1;
         }
-        
-        return el;  // Return the candidate which is the majority element
+
+        for(auto it : mpp){
+            int num = it.first;
+            int count = it.second;
+            if (count > n/2) return num; 
+        }
+
+        return -1; 
     }
 };
