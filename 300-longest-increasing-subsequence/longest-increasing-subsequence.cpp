@@ -14,14 +14,15 @@ public:
             }
         }
 
-        int ans = INT_MIN;
+        // int ans = INT_MIN;
 
-        for(int i = 0; i<n; i++){
-            if (dp[i] > ans){
-                ans = dp[i];
-            }
-        }
+        // for(int i = 0; i<n; i++){
+        //     if (dp[i] > ans){
+        //         ans = dp[i];
+        //     }
+        // }
 
-        return ans;
+        // return ans;
+        return *max_element(dp.begin(), dp.end());
     }
 };
