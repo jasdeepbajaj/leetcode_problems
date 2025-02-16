@@ -9,17 +9,15 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        ListNode* slow = head;
-        ListNode* fast = head;
+        unordered_map<ListNode*, int> dict;
+        ListNode* curr = head;
 
-        while (fast!=nullptr && fast->next!=nullptr){
-            slow = slow->next;
-            fast = fast->next->next;
-            
-            if (slow == fast) return true;
-            
-            
+        while(curr!=nullptr){
+            if(dict.find(curr) != dict.end()) return true;
+            dict[curr]++;
+            curr = curr->next;
         }
+
         return false;
     }
 };
