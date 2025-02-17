@@ -1,32 +1,44 @@
 class Solution {
 private:
-    bool dfs(int node, int color, vector<int> &visited, vector<vector<int>>& graph){
-        visited[node] = color;
+    bool checkBipartiteForOneComponent(int start, vector<vector<int>> &graph, vector<int> &color){
 
-        for (auto itr: graph[node]){
-            if (visited[itr] != -1){
-                if (visited[itr] == color){
+        queue<int> q;
+        int n = graph.size();
+
+        q.push(start);
+        color[start] = 0;
+        
+        while(!q.empty()){
+            int node = q.front();
+            int curr_node_color = color[node];
+            q.pop();
+
+            for (auto it:graph[node]){
+                if (color[it] == -1){
+                    color[it] = !curr_node_color;
+                    q.push(it);
+                }
+                else if (color[it] == curr_node_color){
                     return false;
                 }
                 else{
                     continue;
                 }
             }
-            else{
-                if (!dfs(itr, !color, visited, graph)) return false;
-            }
         }
-        return true;
-    }
 
+        return true;
+
+    }
 public:
     bool isBipartite(vector<vector<int>>& graph) {
-        int m = graph.size();
-        vector<int> visited(m, -1);
-        for (int i =0; i<m; i++){
-            if(visited[i] == -1){
-                if(!dfs(i, 0, visited, graph)){return false;}
-                
+
+        int n = graph.size();
+        vector<int> color(n, -1);
+
+        for(int i = 0; i<graph.size(); ++i){
+            if (color[i] == -1){
+                if (checkBipartiteForOneComponent(i, graph, color) == false) return false;
             }
         }
         return true;
