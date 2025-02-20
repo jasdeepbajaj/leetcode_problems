@@ -98,6 +98,15 @@ public:
             dict[key] = new_node;
         }
     }
+
+    ~LRUCache() {
+        Node* curr = head;
+        while (curr != nullptr) {
+            Node* temp = curr;
+            curr = curr->next;
+            delete temp;
+        }
+    }
 };
 
 /**
