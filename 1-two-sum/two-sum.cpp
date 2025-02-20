@@ -1,17 +1,16 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        //better solution - using map
-        map<int, int> mpp; //element, index
-        for(int i = 0; i<nums.size(); ++i){
-            int num = nums[i];
-            int more = target - num;
-            if (mpp.find(more) != mpp.end()){
-                return {mpp[more], i};
+        unordered_map<int, int> dict;
+        int n = nums.size();
+        for (int i = 0; i<n; i++){
+            int curr_num = nums[i];
+            int more = target - curr_num;
+            if (dict.find(more) != dict.end()){
+                return {i, dict[more]};
             }
-            mpp[num] = i;
+            dict[curr_num] = i;
         }
-
         return {-1,-1};
     }
 };
