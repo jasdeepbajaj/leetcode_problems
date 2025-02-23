@@ -15,17 +15,17 @@ public:
         for(int i = n-2; i >=0 ; i--){
             right_max[i] = max(right_max[i+1], height[i]);
         }
-        for(int i = 0; i < n; i++){
-            min_left_right[i] = min(left_max[i], right_max[i]);
-        }
-
         int ans = 0;
         int water_i;
         for(int i = 0; i < n; i++){
+            min_left_right[i] = min(left_max[i], right_max[i]);
             water_i = min_left_right[i] - height[i];
             if (water_i <= 0) water_i = 0;
             ans += water_i;
         }
+
+        // for(int i = 0; i < n; i++){
+        // }
 
         return ans;
 
