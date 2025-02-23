@@ -21,12 +21,12 @@ public:
         
         vector<int> result;
         // Iterate buckets in reverse (highest frequency first)
-        for (int freq = buckets.size() - 1; freq > 0 && result.size() < k; --freq) {
+        for (int freq = buckets.size() - 1; freq > 0; --freq) {
             // Add each number from the current bucket into result
             for (int number : buckets[freq]) {
                 result.push_back(number);
                 if (result.size() == k)
-                    break;  // Stop if we have collected k numbers
+                    return result;  // Stop if we have collected k numbers
             }
         }
         return result;
