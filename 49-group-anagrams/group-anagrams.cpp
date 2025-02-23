@@ -23,8 +23,12 @@ public:
         //     // p is a pair: p.first is the key, p.second is the value
         //     result.push_back(p.second);
         // }
-        for(auto &[key, value] : dict){
-            result.push_back(value);
+        // for(auto &[key, value] : dict){
+        //     result.push_back(value);
+        // }
+
+        for(auto it = dict.begin(); it!=dict.end(); ++it){
+            result.push_back(it->second);
         }
 
         
