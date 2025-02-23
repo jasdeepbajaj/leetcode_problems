@@ -19,9 +19,12 @@ public:
         // for (auto key : dict){
         //     result.push_back(dict[key]);
         // }
-        for (const auto &p : dict) {
-            // p is a pair: p.first is the key, p.second is the value
-            result.push_back(p.second);
+        // for (const auto &p : dict) {
+        //     // p is a pair: p.first is the key, p.second is the value
+        //     result.push_back(p.second);
+        // }
+        for(auto &[key, value] : dict){
+            result.push_back(value);
         }
 
         
