@@ -7,7 +7,7 @@ public:
         
         for (int i = 0; i < n; i++) {
             int curr_temp = temperatures[i];
-            while (!st.empty() && st.top().first < curr_temp) {
+            while (!st.empty() &&   curr_temp >  st.top().first) {
                 auto topPair = st.top();
                 st.pop();
                 ans[topPair.second] = i - topPair.second;
