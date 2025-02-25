@@ -1,64 +1,52 @@
 class Solution {
 public:
+    vector<int> delRow {-1,0,1,0};
+    vector<int> delCol {0,1,0,-1};
+
     int orangesRotting(vector<vector<int>>& grid) {
-        
-        int m = grid.size();
-        int n = grid[0].size();
-        
-        //defining the queue and visited array
-        queue<pair<pair<int, int>, int>> q;
+        int m = grid.size(); //rows
+        int n = grid[0].size(); //cols
         vector<vector<int>> vis(m, vector<int>(n,0));
-        
-        //initializing the queue and the visited array
-        for(int i = 0; i<m; i++){
-            for(int j = 0; j<n; j++){
+
+        queue<pair<pair<int,int>,int>> q; //{{row, col}, time}
+        int time_final = 0;
+
+
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
                 if(grid[i][j] == 2){
                     q.push({{i,j}, 0});
                     vis[i][j] = 2;
                 }
             }
         }
-
-        int time_counter = 0;
-
-        vector<pair<int,int>> movements = {{1,0}, {0,1},{-1,0},{0,-1}}; //down, right, up, left
-
         while(!q.empty()){
-            int time = q.front().second;
-            int row = q.front().first.first;
-            int col = q.front().first.second;
-
-            time_counter = max(time, time_counter);
+            auto front_node = q.front();
+            int r = front_node.first.first;
+            int c = front_node.first.second;
+            int t = front_node.second;
+            time_final = max(t, time_final);
             q.pop();
 
-
-            for(auto movement : movements){
-                
-                int new_row = row + movement.first;
-                int new_col = col + movement.second;
-
-                // if (0 <= new_row < m && 0 <= new_col < n && grid[new_col][new_row] == 1){
-                if (new_row >= 0 && new_row<m && new_col>=0 && new_col<n && vis[new_row][new_col] !=2 && grid[new_row][new_col] == 1){
-                    q.push({{new_row, new_col}, time + 1});
-                    vis[new_row][new_col] = 2;
+            //traverse in neighbors
+            for(int i = 0; i<4; i++){
+                int nRow = r + delRow[i];
+                int nCol = c + delCol[i];
+                if (nRow >= 0 && nRow < grid.size() && nCol >= 0 && nCol < grid[0].size() && grid[nRow][nCol] == 1 && vis[nRow][nCol] != 2){
+                    vis[nRow][nCol] = 2;
+                    q.push({{nRow, nCol}, t + 1});
                 }
-
-            }    
-
-
+            }
         }
-
-        for(int i = 0; i<m; i++){
-            for(int j = 0; j<n; j++){
-                if(vis[i][j] != 2 && grid[i][j] ==1 ){
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if(grid[i][j] == 1 && !vis[i][j]){
                     return -1;
                 }
             }
         }
 
-        return time_counter;
-
-
+        return time_final;
 
     }
 };
