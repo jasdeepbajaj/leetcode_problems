@@ -11,9 +11,7 @@ private:
             vis[node] = 1;
 
             for(int i = 0; i< isConnected.size(); i++){
-                if (isConnected[node][i] == 1 and !vis[i]){
-                    q.push(i);
-                }
+                if (isConnected[node][i] == 1 and !vis[i]) q.push(i);
             }
         }
     }
@@ -21,7 +19,7 @@ public:
     int findCircleNum(vector<vector<int>>& isConnected) {
         vector<int> vis(isConnected.size(), 0);
         int numberofProvinces = 0;
-        queue<int> q;
+        // queue<int> q;
 
         for(int i = 0; i<isConnected.size(); i++){
             if(!vis[i]){
