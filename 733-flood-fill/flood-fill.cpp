@@ -1,33 +1,31 @@
 class Solution {
-private:
-    void bfs(int sr, int sc, int color, vector<vector<int>>& image, vector<vector<int>> &visited, int current_val){
-        queue<pair<int, int>> q;
-        q.push({sr,sc});
-        vector<pair<int, int>> movements = {{1,0}, {0,1}, {-1,0}, {0,-1},{0,0}};
-
-        while(!q.empty()){
-            int curr_x = q.front().first;
-            int curr_y = q.front().second;
-            q.pop();
-
-            for(auto itr: movements){
-                int new_x = curr_x + itr.first;
-                int new_y = curr_y + itr.second;
-                if (0 <= new_x && new_x < image.size() && 0 <= new_y && new_y < image[0].size() && (image[new_x][new_y] == current_val) && !visited[new_x][new_y]){
-                    q.push({new_x, new_y});
-                    image[new_x][new_y] = color;
-                    visited[new_x][new_y] = 1;
-                }
-            }
-        } 
-    }
 public:
+    vector<int> delRow {-1,0,1,0};
+    vector<int> delCol {0,1,0,-1};
+    int m, n;
+
+    void dfs(int sr, int sc, int origColor, int newColor, vector<vector<int>> &vis, vector<vector<int>> &image) {
+        vis[sr][sc] = 1;
+        image[sr][sc] = newColor;
+
+        for(int i = 0; i < 4; i++){
+            int nRow = sr + delRow[i];
+            int nCol = sc + delCol[i];
+            if (nRow >= 0 && nRow < m && nCol >= 0 && nCol < n && !vis[nRow][nCol] && image[nRow][nCol] == origColor) {
+                dfs(nRow, nCol, origColor, newColor, vis, image);
+            }
+        }
+    }
+    
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-        int m = image.size(); 
-        int n = image[0].size();
-        int curr_pix_val = image[sr][sc];
-        vector<vector<int>> visited(m, vector<int>(n, 0));
-        bfs(sr, sc, color, image, visited, curr_pix_val);
+        m = image.size();
+        n = image[0].size();
+        int origColor = image[sr][sc];
+        if(origColor == color) return image;  // no need to process if the color is the same
+
+        vector<vector<int>> vis(m, vector<int>(n, 0));
+        dfs(sr, sc, origColor, color, vis, image);
+
         return image;
     }
 };
